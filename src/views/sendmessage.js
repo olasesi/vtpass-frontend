@@ -29,10 +29,15 @@ export default function SendMessage() {
         const replace_enter = replace_comma.replaceAll(/\s+/g, " ");
         const replace_space_tab_string = replace_enter.replaceAll(/\s\s+/g, " ");
 
-        const replace_080 = replace_space_tab_string.replaceAll("080", "23480");
-        const replace_070 = replace_080.replaceAll("070", "23470");
-        const replace_081 = replace_070.replaceAll("081", "23481");
-        const all_sanitized = replace_081.replaceAll("090", "23490");
+        const array_split = replace_space_tab_string.split(/ /)
+        const filter_only_0 = array_split.map((element)=> element.replaceAll(/^(234)|^(0)/g, "234"))
+
+        const now_to_string = filter_only_0.toString()
+        const replace_comma2 = now_to_string.replaceAll(",", " ");
+        const replace_enter2 = replace_comma2.replaceAll(/\s+/g, " ");
+        const all_sanitized = replace_enter2.replaceAll(/\s\s+/g, " ");
+
+    
 
         setInputFields({ ...inputFields, [name]: all_sanitized });
         const number_to_string = Object.values(inputFields).toString();
